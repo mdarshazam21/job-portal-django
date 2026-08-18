@@ -12,7 +12,7 @@
     </div>
 
     {% if job.salary_min and job.salary_max %}
-        <p class="salary">₹{{ job.salary_min }} - ₹{{ job.salary_max }}</p>
+    <p class="salary">₹{{ job.salary_min }} - ₹{{ job.salary_max }}</p>
     {% endif %}
 
     <hr>
@@ -21,13 +21,13 @@
 
     <div class="job-actions">
         {% if user.is_authenticated and user.role == 'CANDIDATE' %}
-            <a href="{% url 'apply_to_job' job.pk %}" class="btn btn-primary">Apply Now</a>
+        <a href="{% url 'apply_to_job' job.pk %}" class="btn btn-primary">Apply Now</a>
         {% elif not user.is_authenticated %}
-            <a href="{% url 'login' %}" class="btn btn-outline">Login to Apply</a>
+        <a href="{% url 'login' %}" class="btn btn-outline">Login to Apply</a>
         {% endif %}
 
         {% if user == job.recruiter %}
-            <a href="{% url 'job_applicants' job.pk %}" class="btn btn-secondary">View Applicants</a>
+        <a href="{% url 'job_applicants' job.pk %}" class="btn btn-secondary">View Applicants</a>
         {% endif %}
     </div>
 </div>
