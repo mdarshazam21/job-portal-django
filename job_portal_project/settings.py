@@ -26,9 +26,12 @@ SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=False, cast=bool)
-ALLOWED_HOSTS = []
-
-
+ALLOWED_HOSTS = config(
+    "ALLOWED_HOSTS",
+    default="localhost,127.0.0.1",
+).split(  # type: ignore
+    ","
+)  
 # Application definition
 
 INSTALLED_APPS = [
@@ -83,8 +86,8 @@ DATABASES = {
         "NAME": config("DB_NAME"),
         "USER": config("DB_USER"),
         "PASSWORD": config("DB_PASSWORD"),
-        "HOST": config("DB_HOST"),
-        "PORT": config("DB_PORT"),
+        "HOST": config("DB_HOST", default="localhost"),
+        "PORT": config("DB_PORT", default="5432", cast=int),
     }
 }
 
@@ -140,10 +143,9 @@ MAILERS = {
         "BACKEND": "django.core.mail.backends.console.EmailBackend",
     },
 }
-DEFAULT_FROM_EMAIL = 'noreply@jobportal.com'
+DEFAULT_FROM_EMAIL = "noreply@jobportal.com"
 
 AUTH_USER_MODEL = "accounts.User"
-
 
 MESSAGE_TAGS = {
     messages.ERROR: "error",
