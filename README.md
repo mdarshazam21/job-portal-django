@@ -100,8 +100,8 @@ python manage.py test
 ## Screenshots
 ![Login Page](screenshots/LogIn_Page.png)
 ![Signing Off Page](screenshots/Signing_Off_Page.png)
-![Admin Panel](screenshots/admin.png)
-![Logged In as Candidate Page](screenshots/Logged_In_as_Candidate.png)
+![Admin Panel](screenshots/Admin_Panel_Page.png)
+![Logged In as Candidate Page](screenshots/logged_In_as_Candidate.png)
 ![Logged In as Recruiter](screenshots/Logged_In_as_Recruiter.png)
 ![Job Listing Page](screenshots/Job_Listing_Page.png)
 
