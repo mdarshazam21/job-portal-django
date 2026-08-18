@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Create Company Profile | Job Portal{% endblock %}
+
+{% block content %}
+<div class="card form-narrow">
+    <h3 class="card-title">Set Up Your Company Profile</h3>
+    <p class="form-subtext">This information will appear on all of your job postings.</p>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label>{{ field.label }}</label>
+            {{ field }}
+            {% for error in field.errors %}
+            <div class="form-error">{{ error }}</div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary btn-block">Save & Continue</button>
+    </form>
+</div>
+{% endblock %}

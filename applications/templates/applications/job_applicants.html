@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Applicants | {{ job.title }}{% endblock %}
+
+{% block content %}
+<h2 class="page-header">Applicants for {{ job.title }}</h2>
+
+<div class="card">
+    <div class="table-wrapper">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Candidate</th>
+                    <th>Resume</th>
+                    <th>Cover Letter</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for app in applications %}
+                <tr>
+                    <td>{{ app.candidate.username }}</td>
+                    <td><a href="{{ app.resume.url }}" target="_blank" class="btn btn-outline btn-sm">View</a></td>
+                    <td>{{ app.cover_letter|default:"—"|truncatewords:15 }}</td>
+                    <td>{{ app.get_status_display }}</td>
+                    <td>
+                        <form method="post" action="{% url 'update_application_status' app.pk %}" class="status-form">
+                            {% csrf_token %}
+                            <select name="status">
+                                {% for value, label in app.Status.choices %}
+                                <option value="{{ value }}" {% if app.status == value %}selected{% endif %}>{{ label }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="empty-state">No applicants yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

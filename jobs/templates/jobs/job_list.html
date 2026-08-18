@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Browse Jobs | Job Portal{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Job Listings</h2>
+    {% if user.is_authenticated and user.role == 'RECRUITER' %}
+    <a href="{% url 'job_create' %}" class="btn btn-primary">+ Post a Job</a>
+    {% endif %}
+</div>
+
+<div class="card">
+    <form method="get" class="filter-form">
+        <input type="text" name="q" value="{{ query }}" placeholder="Search by title">
+        <input type="text" name="location" value="{{ location }}" placeholder="Location">
+        <select name="job_type">
+            <option value="">All Types</option>
+            {% for value, label in job_types %}
+            <option value="{{ value }}" {% if job_type == value %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+<div class="job-grid">
+    {% for job in page_obj %}
+    <div class="card job-card">
+        <h3>{{ job.title }}</h3>
+        <p class="company-name">{{ job.recruiter.company_profile.company_name }} — {{ job.location }}</p>
+        <div class="job-meta">
+            <span class="badge badge-type">{{ job.get_job_type_display }}</span>
+        </div>
+        {% if job.salary_min and job.salary_max %}
+        <p class="salary">₹{{ job.salary_min }} - ₹{{ job.salary_max }}</p>
+        {% endif %}
+        <a href="{% url 'job_detail' job.pk %}" class="btn btn-outline btn-sm">View Details</a>
+    </div>
+    {% empty %}
+    <p class="empty-state">No jobs found matching your criteria.</p>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}&q={{ query }}&location={{ location }}&job_type={{ job_type }}"
+        class="btn btn-outline btn-sm">← Previous</a>
+    {% endif %}
+    <span class="page-info">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}&q={{ query }}&location={{ location }}&job_type={{ job_type }}"
+        class="btn btn-outline btn-sm">Next →</a>
+    {% endif %}
+</div>
+{% endblock %}

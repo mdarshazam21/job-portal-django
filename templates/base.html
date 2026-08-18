@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Job Portal{% endblock %}</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+
+            <a href="{% url 'home' %}" class="navbar-brand">
+                JobPortal
+            </a>
+
+            <ul class="navbar-links">
+
+                <li>
+                    <a href="{% url 'job_list' %}">Browse Jobs</a>
+                </li>
+
+                {% if user.is_authenticated %}
+
+                {% if user.role == 'CANDIDATE' %}
+                <li>
+                    <a href="{% url 'my_applications' %}">My Applications</a>
+                </li>
+                {% endif %}
+
+                {% if user.role == 'RECRUITER' %}
+                <li>
+                    <a href="{% url 'job_create' %}">Post a Job</a>
+                </li>
+                {% endif %}
+
+                <li>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </li>
+
+                <li>
+                    {{ user.username }} ({{ user.get_role_display }})
+                </li>
+
+                {% else %}
+
+                <li>
+                    <a href="{% url 'login' %}">Login</a>
+                </li>
+
+                <li>
+                    <a href="{% url 'register' %}">Register</a>
+                </li>
+
+                {% endif %}
+
+            </ul>
+        </div>
+    </nav>
+
+
+    <main class="container">
+
+        {% if messages %}
+        <div class="messages">
+
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+
+        </div>
+        {% endif %}
+
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <footer class="footer">
+        &copy; 2026 JobPortal. Built with Django.
+    </footer>
+
+</body>
+
+</html>
