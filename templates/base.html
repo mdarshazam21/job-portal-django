@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Job Portal{% endblock %}</title>
+    <title >{% block title %}Job Portal{% endblock %}</title>
 
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -21,42 +21,22 @@
 
             <ul class="navbar-links">
 
-                <li>
+                <li class="navbar-role">
                     <a href="{% url 'job_list' %}">Browse Jobs</a>
                 </li>
 
                 {% if user.is_authenticated %}
-
                 {% if user.role == 'CANDIDATE' %}
-                <li>
-                    <a href="{% url 'my_applications' %}">My Applications</a>
-                </li>
+                <li class="navbar-role"><a href="{% url 'my_applications' %}">My Applications</a></li>
                 {% endif %}
-
                 {% if user.role == 'RECRUITER' %}
-                <li>
-                    <a href="{% url 'job_create' %}">Post a Job</a>
-                </li>
+                <li class="navbar-role"><a href="{% url 'job_create' %}">Post a Job</a></li>
                 {% endif %}
-
-                <li>
-                    <a href="{% url 'logout' %}">Logout</a>
-                </li>
-
-                <li>
-                    {{ user.username }} ({{ user.get_role_display }})
-                </li>
-
+                <li class="navbar-role">{{ user.username }} ({{ user.get_role_display }})</li>
+                <li class="navbar-role"><a href="{% url 'logout' %}">Logout</a></li>
                 {% else %}
-
-                <li>
-                    <a href="{% url 'login' %}">Login</a>
-                </li>
-
-                <li>
-                    <a href="{% url 'register' %}">Register</a>
-                </li>
-
+                <li class="navbar-role"><a href="{% url 'login' %}">Login</a></li>
+                <li class="navbar-role"><a href="{% url 'register' %}">Register</a></li>
                 {% endif %}
 
             </ul>

@@ -98,8 +98,17 @@ python manage.py test
 | `/api/applications/<id>/status/` | PATCH | Update an application's status (owning recruiter only) |
 
 ## Screenshots
+![Login Page](screenshots/LogIn_Page)
+![Signing Off Page](screenshots/Signing_Off_Page)
+![Admin Panel](screenshots/admin.png)
+![Logged In as Candidate Page](screenshots/Logged_In_as_Candidate)
+![Logged In as Recruiter](screenshots/Logged_In_as_Recruiter)
+![Job Listing Page](screenshots/Job_Listing_Page)
 
-*(Add screenshots of the home page, job listings, and application flow here)*
+## Author
+
+**[Md Arsh Azam]**
+[https://github.com/mdarshazam21]
 
 ## License
 

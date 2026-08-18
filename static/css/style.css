@@ -105,6 +105,15 @@ main {
     padding-left: 22px;
 }
 
+.navbar-role {
+    background-color: rgba(37, 99, 235, 0.15);
+    color: #93c5fd;
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
 /* =====================================================
    3. HERO SECTION (home page)
    ===================================================== */
