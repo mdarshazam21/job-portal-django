@@ -98,12 +98,12 @@ python manage.py test
 | `/api/applications/<id>/status/` | PATCH | Update an application's status (owning recruiter only) |
 
 ## Screenshots
-![Login Page](screenshots/LogIn_Page)
-![Signing Off Page](screenshots/Signing_Off_Page)
+![Login Page](screenshots/LogIn_Page.png)
+![Signing Off Page](screenshots/Signing_Off_Page.png)
 ![Admin Panel](screenshots/admin.png)
-![Logged In as Candidate Page](screenshots/Logged_In_as_Candidate)
-![Logged In as Recruiter](screenshots/Logged_In_as_Recruiter)
-![Job Listing Page](screenshots/Job_Listing_Page)
+![Logged In as Candidate Page](screenshots/Logged_In_as_Candidate.png)
+![Logged In as Recruiter](screenshots/Logged_In_as_Recruiter.png)
+![Job Listing Page](screenshots/Job_Listing_Page.png)
 
 ## Author
 
